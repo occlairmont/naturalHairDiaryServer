@@ -36,15 +36,15 @@ router.post("/login", function (req, res) {
             });
             res.status(200).json({
               user: user,
-              message: "User successfully logged in!",
+              message: "Logged In!",
               sessionToken: token,
             });
           } else {
-            res.status(502).send({ error: "Login failed" });
+            res.status(502).send({ error: "Login Failed." });
           }
         });
       } else {
-        res.status(500).json({ error: "User does not exist. " });
+        res.status(500).json({ error: "User does not exist." });
       }
     })
     .catch((err) => res.status(500).json({ error: err }));
