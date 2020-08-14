@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const Entry = require("../db").import("../models/entry");
 const validateSession = require("../middleware/vaildate-session");
-const entry = require("../models/entry");
+const sequelize = require("../db")
 
 router.post("/new", validateSession,(req, res) => {
     const dateConversion = new Date(req.body.date);
@@ -28,7 +28,14 @@ router.get("/all", validateSession, (req, res) => {
     .catch(err => res.status(500).json({error:err}))
 })
 
-// router.get("/searched-dates", validateSession, (req, res) => {})
+router.get("/search-dates", validateSession, (req, res) => {
+    let startDate = req.body.startDate
+    let endDate = req.body.endDate
+    const query = {
+        text: `SELECT * from entries WHERE owner = '${req.user.id}' AND date BETWEEN '${startDate}' and '${endDate}' ORDER BY date ASC`
+    }
+    sequelize.query(query.text).then(entries => res.status(200).json(entries[0])).catch(err => res.status(500).json({error: err}))
+});
 
 router.put("/update/:id", validateSession, (req, res) => {
     const dateConversion = new Date(req.body.date);
