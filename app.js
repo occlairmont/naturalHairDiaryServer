@@ -11,6 +11,6 @@ app.use(express.json());
 app.use("/user", user);
 app.use("/entry", entry);
 
-app.listen(3001, function(){
+app.listen(process.env.PORT, function(){
     console.log('App is listening on port 3001')
 });
