@@ -1,3 +1,5 @@
 heroku create naturalhair-backend-server
 
 heroku addons:create heroku-postgresql:hobby-dev --app naturalhair-backend-server
+
+https://naturalhair-backend-server.herokuapp.com

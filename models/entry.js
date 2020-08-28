@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
     const Entry = sequelize.define('entry', {
         date: {
-            type: DataTypes.DATEONLY,
+            type: DataTypes.DATE,
             allowNull: false,
         },
         goal: {
