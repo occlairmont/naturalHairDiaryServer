@@ -28,11 +28,11 @@ router.get("/all", validateSession, (req, res) => {
     .catch(err => res.status(500).json({error:err}))
 })
 
-router.get("/search-dates", validateSession, (req, res) => {
+router.post("/search-dates", validateSession, (req, res) => {
     let startDate = req.body.startDate
     let endDate = req.body.endDate
     const query = {
-        text: `SELECT * from entries WHERE owner = '${req.user.id}' AND date BETWEEN '${startDate}' and '${endDate}' ORDER BY date ASC`
+        text: `SELECT * from entries WHERE owner = '${req.user.id}' AND date BETWEEN '${req.body.startDate}' and '${req.body.endDate}' ORDER BY date ASC`
     }
     sequelize.query(query.text).then(entries => res.status(200).json(entries[0])).catch(err => res.status(500).json({error: err}))
 });
