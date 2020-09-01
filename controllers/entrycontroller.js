@@ -22,7 +22,8 @@ router.post("/new", validateSession,(req, res) => {
 router.get("/all", validateSession, (req, res) => {
     let userid = req.user.id
     Entry.findAll({
-        where: {owner: userid}
+        where: {owner: userid},
+        order:[['date', 'DESC']]
     })
     .then(entries => res.status(200).json(entries))
     .catch(err => res.status(500).json({error:err}))
